@@ -15,5 +15,12 @@ namespace Library.Data
         public int ReaderID { get; set; }
         public int DateofRent { get; set; }
         public int DateofReturn { get; set; }
+
+        public Book(int id, string title, string author)
+        {
+            BookID = id;
+            Title = title;
+            Author = author;
+        }
     }
 }
