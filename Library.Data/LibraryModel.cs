@@ -68,6 +68,7 @@ namespace Library.Data
 
             wantedbook.Rented = true;
             wantedbook.ReaderID = readercustomer.ReaderID;
+            readercustomer.Books = new List<Book>();
             readercustomer.Books.Add(wantedbook);
 
             return wantedbook;
@@ -95,10 +96,9 @@ namespace Library.Data
                                     where item.ReaderID == readerid
                                     select item).FirstOrDefault();
             
-            if (removedreader.Books.Count == 0)
-            {
+            
                 listReaders.Remove(removedreader);
-            }
+            
             
 
             return removedreader;
