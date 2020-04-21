@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Library.Data;
 
 namespace Library.FullClient.ViewModel
@@ -11,6 +12,8 @@ namespace Library.FullClient.ViewModel
     public class MaintenanceFormViewModel : INotifyPropertyChanged
     {
         private LibraryModel model = new LibraryModel();
+        public ICommand AddBookCommand { get; private set; }
+        public ICommand BorrowCommand { get; private set; }
         public MaintenanceFormViewModel() 
         {
             Task.Run(() => Init());
@@ -22,6 +25,10 @@ namespace Library.FullClient.ViewModel
             this.OdswiezBooks();
             this.PrzykladoweReaders();
             this.OdswiezReaders();
+            this.AddBookCommand = new RelayCommand(
+                action => this.AddNewBook());
+            this.BorrowCommand = new RelayCommand(
+                action => this.AddRentBook());
         }
 
         private void OdswiezBooks()
@@ -79,6 +86,19 @@ namespace Library.FullClient.ViewModel
                 this.OnPropertyChanged(nameof(Reader));
             }
         }
+
+        private IEnumerable<Book> rentedBooks;
+        public IEnumerable<Book> RentedBooks
+        {
+            get
+            {
+                return this.rentedBooks;
+            }
+            set
+            {
+                this.rentedBooks = value;
+            }
+        }
         public event PropertyChangedEventHandler PropertyChanged;
         private void OnPropertyChanged(string propertyName)
         {
@@ -94,7 +114,82 @@ namespace Library.FullClient.ViewModel
                     new PropertyChangedEventArgs(propertyName));
 
         }
-    
+        // adding new book module
+        private int idRoboczy;
+        public int IdRoboczy
+        {
+            get { return idRoboczy; }
+            set
+            {
+                idRoboczy = value;
+                this.OnPropertyChanged(nameof(IdRoboczy));
+            }
+        }
+
+        private string authorRoboczy;
+        public string AuthorRoboczy
+        {
+            get { return authorRoboczy; }
+            set
+            {
+                authorRoboczy = value;
+                this.OnPropertyChanged(nameof(AuthorRoboczy));
+            }
+        }
+
+        //pobiera text z textboxa AddTitle
+        private string titleRoboczy;
+        public string TitleRoboczy
+        {
+            get { return titleRoboczy; }
+            set
+            {
+                titleRoboczy = value;
+                this.OnPropertyChanged(nameof(TitleRoboczy));
+            }
+        }
+        public void AddNewBook()
+        {
+            model.AddBook(IdRoboczy, TitleRoboczy, AuthorRoboczy);
+        }
+
+        // adding new addtorent module
+
+        private int idRent;
+        public int IdRent
+        {
+            get
+            {
+                return idRent;
+            }
+            set
+            {
+                idRent = value;
+                this.OnPropertyChanged(nameof(IdRent));
+
+            }
+        }
+
+        private int idReaderRent;
+        public int IdReaderRent
+        {
+            get
+            { 
+                return idReaderRent;
+            }
+            set 
+            {
+                idReaderRent = value;
+                this.OnPropertyChanged(nameof(IdReaderRent));
+            }
+        }
+
+        public void AddRentBook()
+        {
+            model.BorrowBook(IdRent, IdReaderRent);
+            this.OnPropertyChanged(nameof(Books));
+            this.OdswiezBooks();
+        }
 
     }
 

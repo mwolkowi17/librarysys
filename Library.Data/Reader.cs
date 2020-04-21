@@ -12,12 +12,14 @@ namespace Library.Data
         public string Name { get; set; }
         public string Surname { get; set; }
         public List<Book>Books { get; set; }
+        public string Alias { get; set; }
 
         public Reader(int readerid, string name, string surname)
         {
             ReaderID = readerid;
             Name = name;
             Surname = surname;
+            Alias = name + " " + surname;
         }
     }
 }
