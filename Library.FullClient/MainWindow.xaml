@@ -23,12 +23,12 @@
         </Grid.ColumnDefinitions>
         <Label x:Name="labelId" Content="List of books"
                        Grid.Column="0" Grid.Row="0" />
-        <ComboBox Grid.Column="1" x:Name ="Lista" ItemsSource="{Binding Path=lista}" Margin="5,5,5.4,5" SelectedItem="{Binding Path=Listawybrana , Mode=TwoWay}"/>
+        <ComboBox Grid.Column="1" x:Name ="Lista" ItemsSource="{Binding Path=Readers}" DisplayMemberPath="Name"  Margin="5,5,5.4,5" SelectedItem="{Binding Path=Listawybrana , Mode=TwoWay}"/>
         <DataGrid Grid.Row="1"
                   Margin="5"
                   AutoGenerateColumns="True"
                   CanUserAddRows="False" 
-                  ItemsSource="{Binding Path=ShowedList}" />
+                  ItemsSource="{Binding Path=Books}" />
         <DataGrid Grid.Row="1"
                   Grid.Column="1"
                   Margin="5"

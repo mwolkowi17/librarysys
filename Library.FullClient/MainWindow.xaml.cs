@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Library.FullClient.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,14 @@ namespace Library.FullClient
     /// </summary>
     public partial class MainWindow : Window
     {
+
+        private MaintenanceFormViewModel viewModel =
+                    new MaintenanceFormViewModel();
+
         public MainWindow()
         {
             InitializeComponent();
+            this.Loaded += (s, e) => { this.DataContext = this.viewModel; };
         }
     }
 }
