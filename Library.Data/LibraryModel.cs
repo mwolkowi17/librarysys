@@ -68,7 +68,10 @@ namespace Library.Data
 
             wantedbook.Rented = true;
             wantedbook.ReaderID = readercustomer.ReaderID;
-            readercustomer.Books = new List<Book>();
+            if (readercustomer.Books == null)
+            {
+                readercustomer.Books = new List<Book>();
+            }
             readercustomer.Books.Add(wantedbook);
 
             return wantedbook;

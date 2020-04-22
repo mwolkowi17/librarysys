@@ -21,5 +21,9 @@ namespace Library.Data
             Surname = surname;
             Alias = name + " " + surname;
         }
+
+        public Reader()
+        {
+        }
     }
 }

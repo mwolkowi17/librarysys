@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -29,11 +30,13 @@ namespace Library.FullClient.ViewModel
                 action => this.AddNewBook());
             this.BorrowCommand = new RelayCommand(
                 action => this.AddRentBook());
+            this.OdswiezRentedBooks();
         }
 
         private void OdswiezBooks()
         {
             // this.Zawody -> wywoluje Zawody.set{...} oraz OnPropertyChanged
+            this.Books = null;
             this.Books = model.ListBooks;
         }
 
@@ -56,7 +59,7 @@ namespace Library.FullClient.ViewModel
             model.AddReader(1, "Marcin", "Wolkowicz");
             model.AddReader(2, "Iwona", "Wolkowicz");
             model.AddReader(3, "Franek", "Wolkowicz");
-            model.AddReader(4, "Łucja", "Wolkowicz");
+            model.AddReader(4, "Łucja", "Wolkowicz");            
         }
         private IEnumerable<Book> books;
         public IEnumerable<Book> Books
@@ -97,8 +100,39 @@ namespace Library.FullClient.ViewModel
             set
             {
                 this.rentedBooks = value;
+                this.OnPropertyChanged(nameof(RentedBooks));
             }
         }
+        private Reader selectedReader;
+        public Reader SelectedReader
+        {
+            get
+            {
+                return this.selectedReader;
+            }
+            set
+            {
+                this.selectedReader = value;
+                this.OnPropertyChanged(nameof(SelectedReader));
+                this.OdswiezRentedBooks();
+                
+            }
+        }
+        private void OdswiezRentedBooks()
+        {
+          
+            Reader roboczy = (from Reader item in Readers
+                              where item == SelectedReader
+                              select item).FirstOrDefault();
+            this.RentedBooks = null;
+            if (roboczy != null) { 
+            
+                this.RentedBooks = roboczy.Books;
+            
+            }
+            //this.RentedBooks = roboczy.Books;
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
         private void OnPropertyChanged(string propertyName)
         {
@@ -189,6 +223,9 @@ namespace Library.FullClient.ViewModel
             model.BorrowBook(IdRent, IdReaderRent);
             this.OnPropertyChanged(nameof(Books));
             this.OdswiezBooks();
+            this.OdswiezRentedBooks();
+
+
         }
 
     }
