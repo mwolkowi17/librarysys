@@ -15,6 +15,9 @@ namespace Library.FullClient.ViewModel
         private LibraryModel model = new LibraryModel();
         public ICommand AddBookCommand { get; private set; }
         public ICommand BorrowCommand { get; private set; }
+        public ICommand DropCommand { get; private set; }
+        public ICommand AddReaderCommand { get; private set; }
+        public ICommand RemoveReaderCommand { get; private set; }
         public MaintenanceFormViewModel() 
         {
             Task.Run(() => Init());
@@ -30,6 +33,12 @@ namespace Library.FullClient.ViewModel
                 action => this.AddNewBook());
             this.BorrowCommand = new RelayCommand(
                 action => this.AddRentBook());
+            this.DropCommand = new RelayCommand(
+                action => this.AddDropBook());
+            this.AddReaderCommand = new RelayCommand(
+                action => this.AddNewReader());
+            this.RemoveReaderCommand = new RelayCommand(
+                Action => this.RemoveReader());
             this.OdswiezRentedBooks();
         }
 
@@ -226,6 +235,100 @@ namespace Library.FullClient.ViewModel
             this.OdswiezRentedBooks();
 
 
+        }
+
+        //adding new addtodrop module
+
+        private int idDrop;
+        public int IdDrop
+        {
+            get
+            {
+                return idDrop;
+            }
+            set
+            {
+                idDrop = value;
+                this.OnPropertyChanged(nameof(IdDrop));
+            }
+        }
+
+        public void AddDropBook()
+        {
+            model.DropOffBook(IdDrop);
+            this.OnPropertyChanged(nameof(Books));
+            this.OdswiezBooks();
+            this.OdswiezRentedBooks();
+        }
+
+        private int idAddReader;
+        public int IdAddReader
+        {
+            get
+            {
+                return idAddReader;
+            }
+            set
+            {
+                idAddReader = value;
+                this.OnPropertyChanged(nameof(idAddReader));
+            }
+        }
+
+        private string nameAddReader;
+        public string NameAddReader
+        {
+            get
+            {
+                return nameAddReader;
+               
+            }
+            set
+            {
+                nameAddReader = value;
+                this.OnPropertyChanged(nameof(NameAddReader));
+            }
+        }
+
+        private string surnameAddReader;
+        public string SurnameAddReader
+        {
+            get
+            {
+                return surnameAddReader;
+
+            }
+            set
+            {
+                surnameAddReader = value;
+                this.OnPropertyChanged(nameof(SurnameAddReader));
+            }
+        }
+
+        public void AddNewReader()
+        {
+            model.AddReader(IdAddReader, NameAddReader, SurnameAddReader);
+            this.OdswiezReaders();
+        }
+
+        private int idRemoveReader;
+        public int IdRemoveReader
+        {
+            get
+            {
+                return idRemoveReader;
+            }
+            set
+            {
+                idRemoveReader = value;
+                this.OnPropertyChanged(nameof(IdRemoveReader));
+            }
+        }
+
+        public void RemoveReader()
+        {
+            model.RemoveReader(IdRemoveReader);
+            this.OdswiezReaders();
         }
 
     }

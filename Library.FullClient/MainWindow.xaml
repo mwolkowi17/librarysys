@@ -106,11 +106,11 @@
 
                 <Label x:Name="labelImieC" Content="Nr książki"
                        Grid.Column="0" Grid.Row="0" />
-                <TextBox x:Name="textBoxImieC" Text="{Binding Path=NameRobocze , Mode=TwoWay}"
+                <TextBox x:Name="textBoxImieC" Text="{Binding Path=IdDrop , Mode=TwoWay}"
                          Grid.Column="1" Grid.Row="0" Margin="0,5" />
 
 
-                <Button Grid.Row="4" Content="Zwróć" HorizontalAlignment="Left"  Width="90" Command="{Binding AddClientCommand}"  />
+                <Button Grid.Row="4" Content="Zwróć" HorizontalAlignment="Left"  Width="90" Command="{Binding DropCommand}"  />
             </Grid>
         </GroupBox>
         <GroupBox Grid.Column="1" Grid.Row="3"
@@ -129,17 +129,17 @@
 
                 <Label x:Name="labelImie" Content="Nr"
                        Grid.Column="0" Grid.Row="0" />
-                <TextBox x:Name="textBoxImie" Text="{Binding Path=NameRobocze , Mode=TwoWay}"
+                <TextBox x:Name="textBoxImie" Text="{Binding Path=IdAddReader , Mode=TwoWay}"
                          Grid.Column="1" Grid.Row="0" Margin="0,5" />
                 <Label x:Name="labelNazwisko" Content="Imię"
                        Grid.Column="0" Grid.Row="1" />
-                <TextBox x:Name="textBoxNazwisko" Text="{Binding Path=SurnameRobocze , Mode=TwoWay}"
+                <TextBox x:Name="textBoxNazwisko" Text="{Binding Path=NameAddReader , Mode=TwoWay}"
                          Grid.Column="1" Grid.Row="1" Margin="0,5" />
                 <Label x:Name="labelAdres" Content="Nazwisko"
                        Grid.Column="0" Grid.Row="2" />
-                <TextBox x:Name="textBoxAdres" Text="{Binding Path=NationlityRobocze , Mode=TwoWay}"
+                <TextBox x:Name="textBoxAdres" Text="{Binding Path=SurnameAddReader , Mode=TwoWay}"
                          Grid.Column="1" Grid.Row="2" Margin="0,5" />
-                <Button Grid.Row="4" Content="Dodaj czytelnika" HorizontalAlignment="Left"  Width="90" Command="{Binding AddClientCommand}"  />
+                <Button Grid.Row="4" Content="Dodaj czytelnika" HorizontalAlignment="Left"  Width="90" Command="{Binding AddReaderCommand}"  />
             </Grid>
         </GroupBox>
         <GroupBox Grid.Column="1" Grid.Row="4"
@@ -158,10 +158,10 @@
 
                 <Label x:Name="labelImieD" Content="Nr czytelnika"
                        Grid.Column="0" Grid.Row="0" />
-                <TextBox x:Name="textBoxImieD" Text="{Binding Path=NameRobocze , Mode=TwoWay}"
+                <TextBox x:Name="textBoxImieD" Text="{Binding Path=IdRemoveReader , Mode=TwoWay}"
                          Grid.Column="1" Grid.Row="0" Margin="0,5" />
 
-                <Button Grid.Row="4" Content="Usuń czytelnika" HorizontalAlignment="Left"  Width="90" Command="{Binding AddClientCommand}"  />
+                <Button Grid.Row="4" Content="Usuń czytelnika" HorizontalAlignment="Left"  Width="90" Command="{Binding RemoveReaderCommand}"  />
             </Grid>
         </GroupBox>
     </Grid>

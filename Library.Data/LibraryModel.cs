@@ -87,6 +87,7 @@ namespace Library.Data
                                      where item.ReaderID == wantedbook.ReaderID
                                      select item).FirstOrDefault();
             wantedbook.Rented = false;
+            wantedbook.ReaderID = 0;
             readercustomer.Books.Remove(wantedbook);
 
             return wantedbook;
